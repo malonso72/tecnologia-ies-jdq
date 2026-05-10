@@ -1,0 +1,36 @@
+# ═══════════════════════════════════════════════════════════════
+# Cloudflare Workers Static Assets — exclusiones
+# Misma sintaxis que .gitignore
+# ═══════════════════════════════════════════════════════════════
+
+# Carpeta interna de git (puede ser enorme, no se publica)
+.git
+.git/
+.git/**
+.git/objects/**
+.git/objects/pack/**
+**/.git/**
+**/*.pack
+**/*.idx
+
+# Documentación interna del proyecto
+documentacion/
+
+# Configuración interna de Cloudflare/wrangler
+wrangler.toml
+.wrangler/
+
+# Versiones antiguas de archivos en formato editable
+*.docx
+*.zip
+*.tar
+*.tar.gz
+
+# Editores
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,11 @@
+# ═══════════════════════════════════════════════════════════════
+# Hub Tecnología · IES Jiménez de Quesada
+# Configuración de Cloudflare Workers Static Assets
+# ═══════════════════════════════════════════════════════════════
+
+name = "tecnologia-ies-jdq"
+compatibility_date = "2026-05-10"
+
+# Sitio estático: servir todos los archivos del repo como assets
+[assets]
+directory = "./"

@@ -1,0 +1,8 @@
+# robots.txt — Hub Tecnología · IES Jiménez de Quesada
+# Permite a los buscadores indexar todo el contenido público.
+
+User-agent: *
+Allow: /
+
+# Mapa del sitio para facilitar la indexación
+Sitemap: https://tecnologia-ies-jdq.malonso72.workers.dev/sitemap.xml

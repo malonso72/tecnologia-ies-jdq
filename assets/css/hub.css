@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════════════════════════════
+   Hub Tecnología · CSS de la página hub única
+   ═══════════════════════════════════════════════════════════════ */
+
+html,body{background:radial-gradient(circle at top,#F8FBFF 0,#EAF2FA 40%,#D8E5F4 100%);overflow-x:hidden}
+
+/* ── Banner de cabecera con fachada ── */
+.hd-hero{position:relative;max-width:1240px;margin:14px auto 0;background:linear-gradient(rgba(15,40,75,.50),rgba(15,40,75,.72)),url('../../img/fachadaiesjdq.jpg') center/cover no-repeat;color:#fff;padding:54px 24px 50px;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 6px 22px rgba(27,79,138,.20);min-height:240px;border-radius:8px}
+.hd-hero-logo{flex-shrink:0;width:104px;height:104px;background:#fff;border-radius:18px;padding:8px;box-shadow:0 8px 22px rgba(0,0,0,.40);display:flex;align-items:center;justify-content:center}
+.hd-hero-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.hd-hero-text{text-align:center;min-width:0;text-shadow:0 2px 12px rgba(0,0,0,.65)}
+.hd-hero h1{font-family:var(--cond);font-size:2.4rem;font-weight:700;margin-bottom:10px;letter-spacing:.01em}
+.hd-hero p{font-size:1rem;opacity:.96;max-width:680px;margin:0 auto;line-height:1.55}
+.hd-hero p strong{font-weight:600}
+@media(max-width:640px){.hd-hero{flex-direction:column;gap:14px;padding:36px 20px 32px;min-height:210px}.hd-hero-logo{width:80px;height:80px}.hd-hero h1{font-size:1.85rem}.hd-hero p{font-size:.9rem}}
+
+/* ── Layout principal ── */
+.hub-main{max-width:1240px;margin:0 auto;padding:30px 22px 50px}
+
+/* ── Texto introductorio ── */
+.hub-intro{max-width:780px;margin:8px auto 30px;text-align:center;color:var(--texto2);font-size:1rem;line-height:1.65}
+.hub-intro h2{font-family:var(--cond);font-size:1.55rem;font-weight:700;color:var(--principal);margin-bottom:10px;letter-spacing:.01em}
+
+/* ── Grid de tarjetas grandes ── */
+.bg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-bottom:36px}
+
+/* ── Tarjeta de curso ── */
+.bc{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0,#FBFCFE 100%);border:1px solid var(--bd);border-radius:16px;padding:22px 22px 18px;cursor:pointer;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;text-align:left;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;box-shadow:0 4px 14px rgba(20,40,70,.06);min-height:200px}
+.bc::before{content:'';position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,var(--card-2,#2E7BC4),var(--card-1,#1B4F8A))}
+.bc:hover{border-color:var(--card-1,#1B4F8A);box-shadow:0 16px 32px rgba(20,40,70,.14);transform:translateY(-4px)}
+
+/* Etiqueta del curso (1º ESO, 2º ESO, etc.) en esquina superior derecha */
+.bc .curso-num{position:absolute;top:14px;right:14px;font-family:var(--cond);font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--card-1,#1B4F8A);background:var(--card-bg,#EEF4FB);padding:3px 9px;border-radius:6px;border:1px solid var(--card-cl,#DDE9F7);text-transform:uppercase}
+
+/* Icono grande con fondo coloreado */
+.bi{width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:1.7rem;line-height:1;margin-bottom:8px;background:linear-gradient(135deg,var(--card-bg,#EEF4FB),var(--card-cl,#DDE9F7));box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 4px 12px rgba(20,40,70,.10)}
+
+/* Nombre del curso (CyR / TyD / Tec / TECI) */
+.bk{font-family:var(--cond);font-weight:700;font-size:1.35rem;color:var(--card-1,#1B4F8A);line-height:1.18;letter-spacing:.01em}
+
+/* Sub-nombre completo */
+.bn{font-size:.92rem;color:var(--t2);line-height:1.5;font-family:var(--sans);margin-bottom:auto}
+
+/* Línea inferior con la URL y la flecha */
+.bc .bc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px dashed var(--bd);font-size:.78rem;color:var(--t2);font-family:var(--mono)}
+.bc .bc-foot .arrow{font-size:1rem;color:var(--card-1,#1B4F8A);transition:transform .2s}
+.bc:hover .bc-foot .arrow{transform:translateX(3px)}
+
+/* ── Colores por curso (variables locales) ── */
+.bc.curso-cyr1{--card-1:var(--cyr1);--card-2:#2EB088;--card-cl:#D7F2E7;--card-bg:#E7F7EF}
+.bc.curso-tyd2{--card-1:var(--tyd2);--card-2:#F08D3A;--card-cl:#FCE8D2;--card-bg:#FEF4E9}
+.bc.curso-tyd3{--card-1:var(--tyd3);--card-2:#B14152;--card-cl:#F2D9DD;--card-bg:#F9ECEF}
+.bc.curso-tec4{--card-1:var(--tec4);--card-2:#8059B5;--card-cl:#E8DFF4;--card-bg:#F4EEFA}
+.bc.curso-teci{--card-1:var(--teci);--card-2:#1F5F94;--card-cl:#D5E2F0;--card-bg:#E8EFF7}
+
+/* ── Aviso ── */
+.aviso{max-width:780px;margin:36px auto 18px;padding:20px 26px;background:#fff;border:1px solid var(--bd);border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;line-height:1.65;color:var(--tx);box-shadow:0 4px 12px rgba(20,40,70,.04)}
+.aviso h3{font-family:var(--cond);font-size:1.12rem;font-weight:700;color:var(--principal);margin-bottom:10px;letter-spacing:.01em}
+.aviso p{margin:0 0 8px}
+.aviso p:last-child{margin-bottom:0}
+.aviso a{color:var(--principal);text-decoration:underline;text-underline-offset:2px}
+
+/* ── Pie ── */
+.foot{text-align:center;margin-top:48px;font-size:.8rem;color:var(--t2);line-height:1.7}
+.foot .version{font-family:var(--mono);font-size:.72rem;background:#fff;border:1px solid var(--bd);padding:2px 8px;border-radius:6px;display:inline-block;margin:6px 0}
+
+/* ── Print ── */
+@media print{
+  html,body{background:#fff!important}
+  .hd-hero,.aviso{box-shadow:none!important}
+  .bc{break-inside:avoid;border:1px solid #999!important}
+}
