@@ -4,5 +4,8 @@
 User-agent: *
 Allow: /
 
-# Mapa del sitio para facilitar la indexación
+# Mapa del sitio del hub
 Sitemap: https://tecnologia-ies-jdq.malonso72.workers.dev/sitemap.xml
+
+# Sitemap index del ecosistema (hub + subsitios)
+Sitemap: https://tecnologia-ies-jdq.malonso72.workers.dev/sitemap-index.xml
