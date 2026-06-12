@@ -1,6 +1,6 @@
 # Hub Tecnología · IES Jiménez de Quesada
 
-**Departamento de Tecnología · Curso 2025-26**
+**Departamento de Tecnología · Curso 2026-27**
 Profesor: Manuel Alonso Herrera · Santa Fe (Granada)
 
 Página índice única que centraliza el acceso a las 5 webs de

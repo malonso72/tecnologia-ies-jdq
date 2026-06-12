@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Calendario escolar 2026-27 · Granada · Tecnología · IES Jiménez de Quesada</title>
+
+<!-- ══ SEO ══ -->
+<meta name="description" content="Calendario escolar oficial de Granada para el curso 2026-27: inicio y fin de curso, vacaciones, festivos y días no lectivos. Departamento de Tecnología del IES Jiménez de Quesada (Santa Fe, Granada).">
+<meta name="keywords" content="calendario escolar, Granada, 2026-27, IES Jiménez de Quesada, Santa Fe, ESO, Bachillerato, Junta de Andalucía, festivos, vacaciones, días lectivos">
+<meta name="author" content="Manuel Alonso Herrera">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tecnologia-ies-jdq.malonso72.workers.dev/calendario.html">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Calendario escolar 2026-27 · Granada · IES Jiménez de Quesada">
+<meta property="og:description" content="Calendario escolar oficial de Granada para el curso 2026-27. Hitos, vacaciones y días lectivos.">
+<meta property="og:image" content="https://tecnologia-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tecnologia-ies-jdq.malonso72.workers.dev/calendario.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/common.css">
+<link rel="stylesheet" href="assets/css/hub.css">
+
+<style>
+/* Calendario-específico */
+.cal-back{max-width:1240px;margin:14px auto 0;padding:0 22px}
+.cal-back a{display:inline-block;color:var(--principal);text-decoration:none;font-size:.92rem;padding:6px 0;font-family:var(--cond);letter-spacing:.01em}
+.cal-back a:hover{text-decoration:underline}
+
+.hitos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:8px 0 32px}
+.hito{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--principal);border-radius:10px;padding:16px 18px;box-shadow:0 4px 14px rgba(20,40,70,.05)}
+.hito.tipo-inicio{border-left-color:#2EB088}
+.hito.tipo-fin{border-left-color:#B14152}
+.hito.tipo-vacaciones{border-left-color:#D4700A}
+.hito.tipo-festivo{border-left-color:#8059B5}
+.hito .fecha{font-family:var(--cond);font-weight:700;font-size:1.12rem;color:var(--principal);letter-spacing:.01em;margin-bottom:4px}
+.hito.tipo-inicio .fecha{color:#1B7A5C}
+.hito.tipo-fin .fecha{color:#8A2A38}
+.hito.tipo-vacaciones .fecha{color:#A8550A}
+.hito.tipo-festivo .fecha{color:#5C3F8C}
+.hito .desc{font-size:.92rem;color:var(--tx);line-height:1.4}
+
+.cal-tabla{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden;font-size:.92rem;box-shadow:0 4px 14px rgba(20,40,70,.05);margin-bottom:24px}
+.cal-tabla th{background:var(--principal);color:#fff;text-align:left;padding:11px 14px;font-family:var(--cond);font-weight:600;letter-spacing:.02em}
+.cal-tabla td{padding:9px 14px;border-top:1px solid var(--bd);vertical-align:top}
+.cal-tabla tr:nth-child(even) td{background:#FAFBFC}
+.cal-tabla td.fecha{font-family:var(--mono);font-size:.86rem;color:var(--t2);white-space:nowrap;width:170px}
+.cal-tabla td.tipo{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;width:130px}
+.cal-tabla td.tipo.festivo{color:#5C3F8C}
+.cal-tabla td.tipo.vacaciones{color:#A8550A}
+.cal-tabla td.tipo.inicio{color:#1B7A5C}
+.cal-tabla td.tipo.fin{color:#8A2A38}
+.cal-tabla td.tipo.especial{color:var(--principal)}
+
+.trimestres-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:8px 0 32px}
+.trim-card{background:linear-gradient(135deg,#fff,#F8FBFF);border:1px solid var(--bd);border-radius:10px;padding:18px 20px;text-align:center;box-shadow:0 4px 14px rgba(20,40,70,.05)}
+.trim-card .trim-num{font-family:var(--cond);font-weight:700;font-size:.82rem;color:var(--t2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.trim-card .trim-rango{font-size:.86rem;color:var(--t2);margin-bottom:10px}
+.trim-card .trim-dias{font-family:var(--cond);font-weight:700;font-size:2.2rem;color:var(--principal);line-height:1}
+.trim-card .trim-label{font-size:.78rem;color:var(--t2);margin-top:4px}
+
+.pdf-link{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#fff,#F8FBFF);border:1px solid var(--bd);border-left:4px solid var(--principal);border-radius:10px;padding:18px 22px;text-decoration:none;color:inherit;box-shadow:0 4px 14px rgba(20,40,70,.05);transition:transform .2s,box-shadow .2s;margin-bottom:24px}
+.pdf-link:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(20,40,70,.10)}
+.pdf-link .pdf-icon{font-size:2.2rem;flex-shrink:0}
+.pdf-link .pdf-info strong{display:block;font-family:var(--cond);font-size:1.08rem;color:var(--principal);margin-bottom:2px}
+.pdf-link .pdf-info span{font-size:.86rem;color:var(--t2)}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<div class="hd-hero">
+  <div class="hd-hero-logo"><img loading="lazy" src="img/logoantiguo.jpg" alt="Logo IES Jiménez de Quesada"></div>
+  <div class="hd-hero-text">
+    <h1>Calendario escolar 2026-27</h1>
+    <p>Provincia de Granada · Junta de Andalucía<br><strong>IES Jiménez de Quesada</strong> · Santa Fe (Granada)</p>
+  </div>
+</div>
+
+<div class="cal-back">
+  <a href="index.html">← Volver al departamento</a>
+</div>
+
+<div class="hub-main" id="main-content">
+
+<div class="hub-intro">
+  <h2>Fechas clave del curso</h2>
+  <p>Los hitos más importantes del calendario escolar oficial de Granada para el curso 2026-27, válido para ESO, Bachillerato, FP y enseñanzas artísticas. El documento oficial firmado se enlaza al final de la página.</p>
+</div>
+
+<!-- ════ HITOS PRINCIPALES ════ -->
+<div class="hitos-grid">
+  <div class="hito tipo-inicio">
+    <div class="fecha">15 sept. 2026</div>
+    <div class="desc">Inicio del curso en ESO, Bachillerato, FP, Enseñanzas Artísticas y Educación Permanente</div>
+  </div>
+  <div class="hito tipo-vacaciones">
+    <div class="fecha">23 dic. 2026 – 6 ene. 2027</div>
+    <div class="desc">Vacaciones de Navidad (vuelta a clase el 7 de enero)</div>
+  </div>
+  <div class="hito tipo-vacaciones">
+    <div class="fecha">22 – 28 mar. 2027</div>
+    <div class="desc">Vacaciones de Semana Santa (vuelta a clase el 29 de marzo)</div>
+  </div>
+  <div class="hito tipo-fin">
+    <div class="fecha">24 may. 2027</div>
+    <div class="desc">Fin de las clases en 2º de Bachillerato (preparación de PEvAU)</div>
+  </div>
+  <div class="hito tipo-fin">
+    <div class="fecha">22 jun. 2027</div>
+    <div class="desc">Fin del curso para ESO, 1º Bachillerato, FP y resto de enseñanzas</div>
+  </div>
+</div>
+
+<!-- ════ DÍAS LECTIVOS POR TRIMESTRE ════ -->
+<div class="section-title">📊 Días lectivos por trimestre <span class="desc">ESO, Bachillerato, FP y enseñanzas artísticas</span></div>
+<div class="trimestres-grid">
+  <div class="trim-card">
+    <div class="trim-num">1.er Trimestre</div>
+    <div class="trim-rango">15 sept. – 22 dic. 2026</div>
+    <div class="trim-dias">67</div>
+    <div class="trim-label">días lectivos</div>
+  </div>
+  <div class="trim-card">
+    <div class="trim-num">2.º Trimestre</div>
+    <div class="trim-rango">7 ene. – 19 mar. 2027</div>
+    <div class="trim-dias">50</div>
+    <div class="trim-label">días lectivos</div>
+  </div>
+  <div class="trim-card">
+    <div class="trim-num">3.er Trimestre</div>
+    <div class="trim-rango">29 mar. – 22 jun. 2027</div>
+    <div class="trim-dias">61</div>
+    <div class="trim-label">días lectivos</div>
+  </div>
+  <div class="trim-card" style="border-left:4px solid var(--principal)">
+    <div class="trim-num">Total curso</div>
+    <div class="trim-rango">15 sept. 2026 – 22 jun. 2027</div>
+    <div class="trim-dias">178</div>
+    <div class="trim-label">días lectivos</div>
+  </div>
+</div>
+
+<!-- ════ FESTIVOS Y NO LECTIVOS ════ -->
+<div class="section-title">🗓️ Festivos y días no lectivos <span class="desc">Orden cronológico</span></div>
+<table class="cal-tabla">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Tipo</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="fecha">Lu 12 oct. 2026</td><td class="tipo festivo">Festivo</td><td>Fiesta Nacional de España</td></tr>
+    <tr><td class="fecha">Lu 2 nov. 2026</td><td class="tipo festivo">Festivo</td><td>Día de Todos los Santos (trasladado del domingo 1)</td></tr>
+    <tr><td class="fecha">Lu 7 dic. 2026</td><td class="tipo festivo">Festivo</td><td>Día de la Constitución (trasladado del domingo 6)</td></tr>
+    <tr><td class="fecha">Ma 8 dic. 2026</td><td class="tipo festivo">Festivo</td><td>Inmaculada Concepción</td></tr>
+    <tr><td class="fecha">Mi 23 dic. 2026 – Mi 6 ene. 2027</td><td class="tipo vacaciones">Vacaciones</td><td>Vacaciones de Navidad</td></tr>
+    <tr><td class="fecha">Vi 26 feb. 2027</td><td class="tipo especial">No lectivo</td><td>Día de la Comunidad Educativa</td></tr>
+    <tr><td class="fecha">Lu 1 mar. 2027</td><td class="tipo festivo">Festivo</td><td>Día de Andalucía (trasladado del domingo 28 de febrero)</td></tr>
+    <tr><td class="fecha">Lu 22 – Do 28 mar. 2027</td><td class="tipo vacaciones">Vacaciones</td><td>Vacaciones de Semana Santa</td></tr>
+    <tr><td class="fecha">Sá 1 may. 2027</td><td class="tipo festivo">Festivo</td><td>Fiesta del Trabajo</td></tr>
+    <tr><td class="fecha">Lu 24 may. 2027</td><td class="tipo fin">Fin de clases</td><td>Último día lectivo de 2º de Bachillerato</td></tr>
+    <tr><td class="fecha">Vi 28 may. 2027</td><td class="tipo especial">No lectivo</td><td>Día no lectivo provincial (Granada)</td></tr>
+    <tr><td class="fecha">Ma 22 jun. 2027</td><td class="tipo fin">Fin de clases</td><td>Último día lectivo del resto de enseñanzas (ESO, 1º Bach, FP…)</td></tr>
+  </tbody>
+</table>
+
+<!-- ════ PDF OFICIAL ════ -->
+<div class="section-title">📄 Documento oficial</div>
+<a href="docs/calendario-escolar-granada-2026-27.pdf" class="pdf-link" target="_blank" rel="noopener">
+  <div class="pdf-icon">📄</div>
+  <div class="pdf-info">
+    <strong>Calendario escolar provincial 2026-27 · Granada</strong>
+    <span>Delegación Territorial de Granada — Consejería de Desarrollo Educativo y FP · PDF firmado · 515 KB</span>
+  </div>
+</a>
+
+<!-- ════ AVISO ════ -->
+<div class="aviso">
+  <h3>ℹ️ Nota</h3>
+  <p>Este calendario es el resumen de los hitos clave para nuestro centro. Las fechas exactas de evaluación, entrega de notas y eventos del IES Jiménez de Quesada se publican en la web del propio centro y en los tablones del PTC. En caso de discrepancia, prevalece siempre el documento oficial firmado por la Delegación Territorial de Granada.</p>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  © 2026-27 Manuel Alonso Herrera
+  <br><span class="version">Calendario provincial oficial · Granada · 178 días lectivos</span>
+</p>
+
+</div>
+
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
