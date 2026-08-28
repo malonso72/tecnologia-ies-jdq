@@ -1,0 +1,61 @@
+#!/bin/sh
+# ═══════════════════════════════════════════════════════════════
+# pre-push hook — Comprueba HTML y enlaces internos antes de cada push.
+# Si hay HTML mal formado o enlaces rotos, BLOQUEA el push.
+# Compatible con Windows (python), Linux/Mac (python3).
+# ═══════════════════════════════════════════════════════════════
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT" || exit 1
+
+PYTHON=""
+if command -v python3 >/dev/null 2>&1; then
+    if python3 --version >/dev/null 2>&1; then
+        PYTHON="python3"
+    fi
+fi
+if [ -z "$PYTHON" ] && command -v python >/dev/null 2>&1; then
+    if python --version >/dev/null 2>&1; then
+        PYTHON="python"
+    fi
+fi
+if [ -z "$PYTHON" ] && command -v py >/dev/null 2>&1; then
+    if py --version >/dev/null 2>&1; then
+        PYTHON="py"
+    fi
+fi
+
+if [ -z "$PYTHON" ]; then
+    echo "⚠ Aviso: no se encuentra Python en este sistema (probado: python3, python, py)."
+    echo "  Push permitido SIN comprobar. Instala Python desde https://python.org/downloads"
+    echo "  para activar la comprobación automática."
+    exit 0
+fi
+
+echo "🔍 Comprobando HTML y enlaces antes del push (con $PYTHON)..."
+echo ""
+echo "--- verificar_html.py (HTML bien formado) ---"
+$PYTHON scripts/verificar_html.py
+RESULT1=$?
+
+echo ""
+echo "--- verificar_enlaces.py (enlaces internos, anchors) ---"
+$PYTHON scripts/verificar_enlaces.py
+RESULT2=$?
+
+echo ""
+echo "--- comprobar_enlaces.py (href y src, incluye imágenes/scripts) ---"
+$PYTHON scripts/comprobar_enlaces.py
+RESULT3=$?
+
+if [ $RESULT1 -ne 0 ] || [ $RESULT2 -ne 0 ] || [ $RESULT3 -ne 0 ]; then
+    echo ""
+    echo "❌ Push CANCELADO: hay HTML mal formado o enlaces rotos (ver detalle arriba)."
+    echo "   Revisa la lista de arriba, arregla lo que corresponda, vuelve a commitear y push."
+    echo "   Si quieres pushear igualmente (no recomendado), usa: git push --no-verify"
+    exit 1
+fi
+
+echo ""
+echo "✓ HTML y enlaces OK. Continuando con el push..."
+exit 0
