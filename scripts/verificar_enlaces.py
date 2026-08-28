@@ -44,7 +44,28 @@ def listar_htmls() -> list[Path]:
 
 
 def extraer_hrefs(html: str) -> list[str]:
-    return re.findall(r'(?:^|[\s<])href=["\']([^"\']+)["\']', html, re.MULTILINE)
+    hrefs = re.findall(r'(?:^|[\s<])href=["\']([^"\']+)["\']', html, re.MULTILINE)
+    # Descarta hrefs con interpolacion JS (p.ej. href="${v.url}" dentro de una
+    # plantilla de JavaScript) -- no son atributos HTML estaticos reales.
+    return [h for h in hrefs if '${' not in h]
+
+
+DYNAMIC_ID_RE = re.compile(
+    r"""\.id\s*=\s*(?:`([a-zA-Z][\w-]*?)\$\{|['"]([a-zA-Z][\w-]*)['"]\s*\+)"""
+)
+
+
+def extraer_prefijos_dinamicos(html: str) -> set[str]:
+    """Prefijos de id asignados en tiempo de ejecucion via JavaScript
+    (p.ej. sec.id = `bloque-${num}` o sec.id = 'b' + k). El HTML estatico
+    nunca contiene el id final, asi que un anchor que coincide con uno de
+    estos prefijos + sufijo numerico no se considera roto."""
+    prefijos = set()
+    for m in DYNAMIC_ID_RE.finditer(html):
+        p = m.group(1) or m.group(2)
+        if p:
+            prefijos.add(p)
+    return prefijos
 
 
 def es_externo(href: str) -> bool:
@@ -81,9 +102,11 @@ def main() -> int:
 
     rotos = []
     anchors_por_fichero: dict[Path, set[str]] = {}
+    prefijos_por_fichero: dict[Path, set[str]] = {}
     for p in htmls:
         txt = p.read_text(encoding='utf-8', errors='ignore')
         anchors_por_fichero[p.resolve()] = set(re.findall(r'id="([^"]+)"', txt))
+        prefijos_por_fichero[p.resolve()] = extraer_prefijos_dinamicos(txt)
 
     for p in htmls:
         txt = p.read_text(encoding='utf-8', errors='ignore')
@@ -97,8 +120,12 @@ def main() -> int:
                 rotos.append((p.relative_to(ROOT), href, 'fichero no existe'))
                 continue
             if anchor and destino.suffix == '.html':
-                if anchor not in anchors_por_fichero.get(destino, set()):
-                    rotos.append((p.relative_to(ROOT), href, f'anchor #{anchor} no existe'))
+                if anchor in anchors_por_fichero.get(destino, set()):
+                    continue
+                prefijos = prefijos_por_fichero.get(destino, set())
+                if any(anchor.startswith(pre) and anchor[len(pre):].isdigit() for pre in prefijos):
+                    continue  # id generado en tiempo de ejecucion (ver extraer_prefijos_dinamicos)
+                rotos.append((p.relative_to(ROOT), href, f'anchor #{anchor} no existe'))
 
     print('\n=== 1 · Enlaces internos (href + anchors) ===')
     if rotos:
