@@ -37,6 +37,10 @@ def main():
         for link in links:
             if link.startswith(("http", "https", "mailto:", "#", "data:", "javascript:", "//")):
                 continue
+            # Saltar template literals de JavaScript (${...}) que aparecen dentro
+            # de bloques <script> de los libros digitales y se interpolan en runtime.
+            if "${" in link:
+                continue
             total_links += 1
             target = link.split("?")[0].split("#")[0]
             if not target: continue
