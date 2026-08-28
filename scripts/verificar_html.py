@@ -27,6 +27,13 @@ import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
+# Forzar UTF-8 en stdout para que funcione en consolas Windows (cp1252)
+# que no soportan caracteres Unicode como ✓ o ✗.
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
+
 ROOT = Path(__file__).resolve().parent.parent
 
 
