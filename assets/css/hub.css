@@ -52,6 +52,7 @@ html,body{background:radial-gradient(circle at top,#F8FBFF 0,#EAF2FA 40%,#D8E5F4
 .bc.curso-tyd3{--card-1:var(--tyd3);--card-2:#B14152;--card-cl:#F2D9DD;--card-bg:#F9ECEF}
 .bc.curso-tec4{--card-1:var(--tec4);--card-2:#8059B5;--card-cl:#E8DFF4;--card-bg:#F4EEFA}
 .bc.curso-teci{--card-1:var(--teci);--card-2:#1F5F94;--card-cl:#D5E2F0;--card-bg:#E8EFF7}
+.bc.curso-tutoria{--card-1:var(--tutoria);--card-2:#2E93A8;--card-cl:#D7EAEE;--card-bg:#EEF7F8}
 
 /* ── Aviso ── */
 .aviso{max-width:780px;margin:36px auto 18px;padding:20px 26px;background:#fff;border:1px solid var(--bd);border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;line-height:1.65;color:var(--tx);box-shadow:0 4px 12px rgba(20,40,70,.04)}
