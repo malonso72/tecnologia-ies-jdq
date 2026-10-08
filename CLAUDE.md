@@ -37,3 +37,11 @@ Antes de este cambio, este repo solo tenía scripts de higiene de assets (imáge
 - HTML + CSS + JS vanilla, sin frameworks (ver README.md → sección Convenciones si existe).
 - `_soluciones/` es privada y no debe enlazarse desde páginas visibles al alumnado (lo comprueba `verificar_enlaces.py`).
 - `documentacion/` es privada (PROGRAMACION, DECISIONES, PENDIENTES) — no se despliega públicamente salvo que el `.assetsignore` diga lo contrario; revisa `.assetsignore` antes de asumirlo.
+
+## ENTORNO DE TRABAJO (desde oct-2026)
+
+- **Equipo principal: el portátil de Manuel** (Windows 10). Los repos están en `C:\Users\Manuel\Documents\Webs\<repo>`; desde la terminal de Claude, en `~/mnt/Webs/<repo>`. El PC de casa de sus padres queda de reserva: si se trabaja allí, primero Pull.
+- **Git:** Claude hace el commit (nombre y correo ya configurados en el repo). **El push no**: la terminal no tiene las credenciales de GitHub. Al terminar, avisar a Manuel para que pulse «Push origin» en GitHub Desktop.
+- **Archivos `.lock`:** sin permiso de borrado, Git deja `.lock` y `tmp_obj_*` dentro de `.git/` y luego GitHub Desktop falla. La primera vez, pedir permiso de borrado sobre la carpeta `Webs` y limpiar solo los que haya dejado la propia sesión, nunca uno que pueda estar usando GitHub Desktop.
+- **Hook de pre-push:** se instala con `python3 scripts/instalar_hooks.py` (copia `scripts/hooks/pre-push` a `.git/hooks/`).
+  Después de instalarlo, comprobar que `.git/hooks/pre-push` queda con saltos de línea LF (`sed -i 's/\r$//' .git/hooks/pre-push`): con CRLF falla sin avisar. Python de Windows está instalado (3.14, en el PATH), así que el hook comprueba de verdad al hacer push desde GitHub Desktop.
