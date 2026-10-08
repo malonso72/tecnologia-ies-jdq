@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Los hooks se ejecutan con sh: siempre con saltos de línea LF
+/scripts/hooks/* text eol=lf
